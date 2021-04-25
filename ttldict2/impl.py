@@ -31,18 +31,16 @@ class TTLDict(dict):
     Not thread-safe!
     """
 
-    __slots__ = ("max_items", "ttl_seconds")
+    __slots__ = ("ttl_seconds", "max_items")
 
-    def __init__(self, max_items: Optional[int] = None, ttl_seconds: Optional[float] = None):
-        if max_items is None and ttl_seconds is None:
-            raise ValueError("At least one of max_items or ttl_seconds must be specified for TTLDict")
+    def __init__(self, ttl_seconds: float, max_items: Optional[int] = None):
+        if not isinstance(ttl_seconds, float) or ttl_seconds <= 0.0:
+            raise ValueError("The value %s is invalid as ttl_seconds for TTLDict" % (ttl_seconds,))
         if max_items is not None and (not isinstance(max_items, int) or max_items < 1):
             raise ValueError("The value %s is invalid as max_items for TTLDict" % (max_items,))
-        if ttl_seconds is not None and (not isinstance(ttl_seconds, float) or ttl_seconds <= 0.0):
-            raise ValueError("The value %s is invalid as ttl_seconds for TTLDict" % (ttl_seconds,))
         dict.__init__(self)
-        self.max_items = max_items
         self.ttl_seconds = ttl_seconds
+        self.max_items = max_items
 
     def drop_old_items(self):
         ttl_now = time.perf_counter()

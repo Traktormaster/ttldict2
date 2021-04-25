@@ -11,7 +11,7 @@ The implementation is a wrapper around the builtin dict. As a design choice the 
 TTL logic are accessible and can be used with caution.
 
 # Install & usage
-A source distribution is available on PyPI:
+It is available on PyPI:
 
 ```console
 $ python -m pip install ttldict2

@@ -11,13 +11,11 @@ def test_ttldict():
         return [ttl_value.value for ttl_value in d_.values()]
 
     with pytest.raises(ValueError):
-        TTLDict()
-    with pytest.raises(ValueError):
-        TTLDict(max_items=0)
+        TTLDict(0, max_items=0)
     with pytest.raises(ValueError):
         TTLDict(ttl_seconds=0)
 
-    d = TTLDict(max_items=12, ttl_seconds=T * 2.0)
+    d = TTLDict(ttl_seconds=T * 2.0, max_items=12)
 
     time.sleep(T * 0.5)
     for i in range(0, 5):
