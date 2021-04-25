@@ -1,3 +1,7 @@
+"""
+:copyright: 2021 Nándor Mátravölgyi
+:license: Apache2, see LICENSE for more details.
+"""
 import time
 from typing import Optional
 
@@ -26,6 +30,7 @@ class TTLDict(dict):
 
     Not thread-safe!
     """
+
     __slots__ = ("max_items", "ttl_seconds")
 
     def __init__(self, max_items: Optional[int] = None, ttl_seconds: Optional[float] = None):
